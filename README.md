@@ -2,7 +2,7 @@
 
 Code for our EMNLP 2019 paper titled 'Learning Rhyming Constraints using Structured Adversaries'
 
-[Link to EMNLP 2019 paper](https://arxiv.org/)
+[Link to EMNLP 2019 paper](https://arxiv.org/abs/1909.06743)
 
 
 ### Requirements
