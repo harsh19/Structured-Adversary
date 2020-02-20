@@ -12,12 +12,14 @@ DISCLAIMER: NOTE THAT THIS DATASET MAY CONTAIN WORDS THAT ARE ABUSIVE, OFFENSIVE
 
 ### Requirements
 
-TODO
+python 3.6.7
+pytorch 0.4.1
 
 
 ### Usage
 
-TODO
+- Download data from the above link to the main project directory
+- Refer to code/Readme.md for instructions to run code
 
 
 ### Reference
