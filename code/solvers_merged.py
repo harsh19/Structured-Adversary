@@ -1475,6 +1475,7 @@ class MainSolver:
 
 
         ##### GET SAMPLES
+        print("=======GET SAMPLES======")
         model.eval()
         samples = []
         x, _, x_start = self.get_batch(i=0, batch_size=331, split='val')  # , typ=args.data_type)
@@ -1486,6 +1487,8 @@ class MainSolver:
                     samples.append(sample_str)
             except TimeoutException as e:
                 print("Timed out!")
+            if i%500==0:
+                print("Done with ", i+1, " samples")
         if not os.path.exists(self.args.model_dir + 'samples_analysis/'):
             os.makedirs(self.args.model_dir + 'samples_analysis/')
         json.dump(samples, open(self.args.model_dir + 'samples_analysis/' + str(epoch) + '.json', 'w'))
