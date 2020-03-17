@@ -27,28 +27,38 @@ python main.py --solver_type Main --mode train_lm --model_name rhymgan_limerick_
 python main.py --solver_type Main --model_name rhymgan1 --vanilla_lm_path tmp/rhymgan_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true --reinforce_weight=0.1 --use_all_sonnet_data true --num_samples_at_epoch_end 150 --epochs 80  > logs/rhymgan1_train.log
 ```
 
-```
-#---- Sonnet2
-python main.py --solver_type Main --model_name rhymgan2 --vanilla_lm_path tmp/rhymgan_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true --reinforce_weight=0.1 --use_all_sonnet_data true --num_samples_at_epoch_end 150 --epochs 80  > logs/rhymgan2_train.log
-```
-
-
 
 ```
 #---- Limerick
-python main.py --solver_type Main --model_name rhymgan_limerick1  --data_type limerick --vanilla_lm_path tmp/rhymgan_limerick_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true --reinforce_weight=0.1 --use_all_sonnet_data true --num_samples_at_epoch_end 150 --epochs 70  > logs/rhymgan_limerick1_train.log
+MODEL_NAME=rhymgan_limerick1
+CUDA_VISIBLE_DEVICES=1 python main.py --solver_type Main --model_name $MODEL_NAME  --data_type limerick --vanilla_lm_path tmp/rhymgan_limerick_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true --reinforce_weight=0.1 --use_all_sonnet_data true --num_samples_at_epoch_end 100 --epochs 100  > logs/"$MODEL_NAME"_train.log
 
 ```
 
 ###### Eval
 
-TODO - Code Documentation in Progress
 ```
 #---- Sonnet
 EPOCH_TO_TEST=69
 #eval
 MODEL_NAME=rhymgan1
 python main.py --solver_type Main --model_name $MODEL_NAME --vanilla_lm_path tmp/rhymgan_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true --reinforce_weight=0.1 --use_all_sonnet_data true --num_samples_at_epoch_end 100 --epochs 80 --mode eval --epoch_to_test $EPOCH_TO_TEST  | tee  logs/"$MODELNAME"_eval.log
+
 #eval with lower temperature
-CUDA_VISIBLE_DEVICES=1 python main.py --solver_type Main --model_name $MODEL_NAME --vanilla_lm_path tmp/rhymgan_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true  --use_all_sonnet_data true --mode eval --epoch_to_test $EPOCH_TO_TEST --temperature 0.7 | tee logs/"$MODEL_NAME"_temp7_eval.log
+python main.py --solver_type Main --model_name $MODEL_NAME --vanilla_lm_path tmp/rhymgan_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true  --use_all_sonnet_data true --mode eval --epoch_to_test $EPOCH_TO_TEST --temperature 0.7 | tee logs/"$MODEL_NAME"_temp7_eval.log
+```
+
+
+
+```
+#---- Limerick
+EPOCH_TO_TEST=74
+#eval
+MODEL_NAME=rhymgan_limerick1
+python main.py --solver_type Main --model_name $MODEL_NAME --data_type limerick --vanilla_lm_path tmp/rhymgan_limerick_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true   --mode eval --epoch_to_test $EPOCH_TO_TEST  | tee  logs/"$MODELNAME"_eval.log
+
+#eval with lower temperature
+MODEL_NAME=rhymgan_limerick1
+python main.py --solver_type Main --model_name $MODEL_NAME --data_type limerick --vanilla_lm_path tmp/rhymgan_limerick_lm1/ --load_vanilla_lm true --g2p_model_name rhymgan_ae1 --trainable_g2p true   --mode eval --epoch_to_test $EPOCH_TO_TEST --temperature 0.7 | tee  logs/"$MODELNAME"_temp7_eval.log
+
 ```
